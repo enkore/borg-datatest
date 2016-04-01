@@ -11,6 +11,7 @@ for archive in "${ARCHIVES[@]}"; do
     echo Creating $REPO::$file
     borg create $REPO::$file $file -C lz4
 done
+cd ..
 
 rm -rf $ARENA
 for repo in $PWD/repository-*; do
