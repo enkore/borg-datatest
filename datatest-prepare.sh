@@ -6,7 +6,7 @@ mkdir -p $DOWNLOAD $EXTRACT
 
 for archive in "${ARCHIVES[@]}"; do
     IFS=,
-    read cmd file url <<< "$archive"
+    read file url <<< "$archive"
     IFS=' '
     if [ -f $DOWNLOAD/$file ]; then
         echo Skipping "$url"
@@ -16,6 +16,6 @@ for archive in "${ARCHIVES[@]}"; do
     wget --no-verbose --limit-rate=$RATELIMIT -O $DOWNLOAD/$file $url
     cd $EXTRACT
     rm -rf $file
-    eval $cmd $DOWNLOAD/$file
+    tar xf $DOWNLOAD/$file
     cd ..
 done

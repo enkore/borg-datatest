@@ -6,7 +6,7 @@ borg init $REPO
 cd $EXTRACT
 for archive in "${ARCHIVES[@]}"; do
     IFS=,
-    read cmd file url <<< "$archive"
+    read file url <<< "$archive"
     IFS=' '
     echo Creating $REPO::$file
     borg create $REPO::$file $file -C lz4
@@ -20,7 +20,7 @@ for repo in $PWD/repository-*; do
     cd $workdir
     for archive in "${ARCHIVES[@]}"; do
         IFS=,
-        read cmd file url <<< "$archive"
+        read file url <<< "$archive"
         IFS=' '
         echo "  $file"
         borg extract $repo::$file
