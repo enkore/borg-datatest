@@ -9,7 +9,7 @@ for archive in "${ARCHIVES[@]}"; do
     read cmd file url <<< "$archive"
     IFS=' '
     echo Creating $REPO::$file
-    borg create ../$REPO::$file $file -C lz4
+    borg create $REPO::$file $file -C lz4
 done
 
 rm -rf $ARENA

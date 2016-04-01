@@ -8,14 +8,14 @@ for archive in "${ARCHIVES[@]}"; do
     IFS=,
     read cmd file url <<< "$archive"
     IFS=' '
-    if [ -f $DOWNLOAD/$file.x ]; then
+    if [ -f $DOWNLOAD/$file ]; then
         echo Skipping "$url"
         continue
     fi
     echo Downloading "$url" ...
     wget --no-verbose --limit-rate=$RATELIMIT -O $DOWNLOAD/$file $url
     cd $EXTRACT
-    rm -r $file
-    eval $cmd ../$DOWNLOAD/$file
+    rm -rf $file
+    eval $cmd $DOWNLOAD/$file
     cd ..
 done
