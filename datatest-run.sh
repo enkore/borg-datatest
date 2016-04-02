@@ -2,6 +2,11 @@
 
 . settings.sh
 
+if [ -d $REPO ]; then
+    echo "This commit was already tested. Skipping."
+    exit 0
+fi
+
 borg init $REPO
 cd $EXTRACT
 for archive in "${ARCHIVES[@]}"; do
